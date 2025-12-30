@@ -1,3 +1,38 @@
+/**************************************************************
+ * Scott Schmidt; Data Structures @ Illinois State University;
+  IT279 Part 1 – Spell Checker
+ *
+ * This program checks the spelling of words in a text file.
+ *
+ * The program uses three input files:
+ * 1) A dictionary file that contains correctly spelled words
+ * 2) A text file to check for spelling errors
+ * 3) An output file that shows the structure of the dictionary
+ *
+ * First, the program reads the dictionary file and stores all
+ * words in a Dictionary data structure. All words are converted
+ * to lowercase, and duplicate words are ignored.
+ *
+ * Next, the program reads the text file line by line. Each word
+ * is cleaned, converted to lowercase, and checked against the
+ * dictionary. If a word is not found, it is reported as a
+ * misspelling.
+ *
+ * For each misspelled word, the program prints the word and the
+ * line number where it appears. It also prints possible
+ * corrections if any are found.
+ *
+ * Possible corrections are created by:
+ * - Adding one letter
+ * - Removing one letter
+ * - Swapping two neighboring letters
+ *
+ * All spelling results are printed to the terminal. The final
+ * dictionary structure is printed to the output file.
+ *
+ **************************************************************/
+
+
 //INCLUDE IMPORTS:
 #include <fstream> //files
 #include <iostream> //terminal
