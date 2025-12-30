@@ -59,22 +59,35 @@ int main(int argc, char* argv[]) {
     string lineText;
     int lineNum = 1;
 
-    while (getline(textFile, lineText)) {
-        stringstream lineStream(lineText);
-        string word;
-        while (lineStream >> word) {
-       for (size_t i = 0; i < word.size(); ++i) {
-         word[i] = static_cast<char>(std::tolower(static_cast<unsigned char>(word[i])));
+ while (getline(textFile, lineText)) {
+    // SPLIT HYPHENATED WORDS
+    for (char &ch : lineText) {
+        if (ch == '-') {
+            ch = ' ';
         }
+    }
+
+    stringstream lineStream(lineText);
+    string word;
+
+    while (lineStream >> word) {
+        for (size_t i = 0; i < word.size(); ++i) {
+            word[i] = static_cast<char>(
+                std::tolower(static_cast<unsigned char>(word[i]))
+            );
+        }
+
         word = normalize(word);
-        if (word.empty()) continue;
+        if (word.empty()) continue; // if no word skip and go on
+
         if (!dict.contains(word)) {
             vector<string> suggestions = generateSuggestions(word, dict);
             printMisspelling(word, lineNum, suggestions);
         }
     }
     lineNum++;
-    }
+}
+
     //OUTPUT THE DATA STRUCUTRE:
     ofstream out(argv[3]);
     if (!out) {
@@ -120,14 +133,23 @@ vector<string> generateSuggestions(const string& word, const Dictionary& dict) {
         std::swap(s[i - 1], s[i]);
         if (dict.contains(s)) out.push_back(std::move(s));
     }
- 
-    // optional: remove duplicates + keep sorted output
-    std::sort(out.begin(), out.end());
-    out.erase(std::unique(out.begin(), out.end()), out.end());
- 
     return out;
 }
 
+void printMisspelling(string word, int lineNum, vector<string> suggestions) {
+    cout << word << " on line " << lineNum << endl;
+    if (suggestions.empty()) {
+        cout << "No suggestions found" << endl;
+    } else {
+        cout << "Suggested corrections:" << endl;
+        cout << "    ";
+        for (const auto& s : suggestions) {
+            cout << s << "    ";
+        }
+        cout << endl;
+    }
+    cout << endl; //prints a blank line
+}
     /*
     FORMAT OF MISPELLED WORD:
         saed on line 5
@@ -137,20 +159,3 @@ vector<string> generateSuggestions(const string& word, const Dictionary& dict) {
     remirmand on line 6
     No suggestions found
     */
-
-void printMisspelling(string word, int lineNum, vector<string> suggestions) {
-    //cout << "Line " << lineNum << ": " << word << " is misspelled";
-    if (suggestions.empty()) {
-        cout << word << "on line" << lineNum << endl;
-        cout << "No suggestions found" << endl;
-        cout << "    " << endl;
-    } else {
-        cout << " Suggested corrections:" <<endl;
-        for (size_t i = 0; i < suggestions.size(); i++) {
-            cout << suggestions[i];
-            if (i + 1 < suggestions.size())
-                cout << "    ";
-        }
-    }
-    cout << endl;
-}
