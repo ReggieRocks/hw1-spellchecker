@@ -55,15 +55,6 @@ int main(int argc, char* argv[]) {
         cout << "Could not open test1.txt\n";
         return 1;
     }
-    /*
-    FORMAT OF MISPELLED WORD:
-        saed on line 5
-    Suggested corrections:
-        saved    sad
-
-    remirmand on line 6
-    No suggestions found
-    */
 
     string lineText;
     int lineNum = 1;
@@ -137,18 +128,29 @@ vector<string> generateSuggestions(const string& word, const Dictionary& dict) {
     return out;
 }
 
-void printMisspelling(string word, int lineNum, vector<string> suggestions) {
-    cout << "Line " << lineNum << ": " << word << " is misspelled";
+    /*
+    FORMAT OF MISPELLED WORD:
+        saed on line 5
+    Suggested corrections:
+        saved    sad
 
-    if (!suggestions.empty()) {
-        cout << " (suggestions: ";
+    remirmand on line 6
+    No suggestions found
+    */
+
+void printMisspelling(string word, int lineNum, vector<string> suggestions) {
+    //cout << "Line " << lineNum << ": " << word << " is misspelled";
+    if (suggestions.empty()) {
+        cout << word << "on line" << lineNum << endl;
+        cout << "No suggestions found" << endl;
+        cout << "    " << endl;
+    } else {
+        cout << " Suggested corrections:" <<endl;
         for (size_t i = 0; i < suggestions.size(); i++) {
             cout << suggestions[i];
             if (i + 1 < suggestions.size())
-                cout << ", ";
+                cout << "    ";
         }
-        cout << ")";
     }
-
     cout << endl;
 }
