@@ -1,1 +1,7 @@
+*.o
+*.out
+a.out
+spellcheck_part1
+*.dSYM/
+dictstruct_out.txt
 
