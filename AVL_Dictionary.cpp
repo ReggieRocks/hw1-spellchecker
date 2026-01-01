@@ -74,7 +74,7 @@ Dictionary::Node* Dictionary::rotateLeft(Node* x) {
 }
 
 /* ============================================================
-   Insert (AVL logic)
+   AVL Tree, Insert Function:
    This function inserts a word and rebalances the tree if needed.
    ============================================================ */
 Dictionary::Node* Dictionary::insert(Node* node, string* word) {

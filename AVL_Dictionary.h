@@ -1,5 +1,5 @@
 /*
-AVL Binary Search Tree: 
+AVL Binary Search Tree 
 
 This file uses the Dictionary class implemented as an AVL tree.
 An AVL tree is a type of binary search tree that keeps itself
@@ -17,8 +17,6 @@ For an AVL tree, the heights of the left and right subtrees
 at any node can differ by at most one. This balance rule
 guarantees that searching the tree remains efficient.
 */
-
-
 #ifndef DICTIONARY_H
 #define DICTIONARY_H
 

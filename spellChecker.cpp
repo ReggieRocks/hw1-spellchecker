@@ -171,25 +171,24 @@ vector<string> generateSuggestions(const string& word, const Dictionary& dict) {
 }
 
 void printMisspelling(string word, int lineNum, vector<string> suggestions) {
-    cout << word << " on line " << lineNum << endl;
     if (suggestions.empty()) {
-        cout << "No suggestions found" << endl;
+        cout << word << " on line " << lineNum << endl;
+        cout << "No suggestions found\n\n";
     } else {
+        cout << "    " << word << " on line " << lineNum << endl;
         cout << "Suggested corrections:" << endl;
-        cout << "    ";
         for (const auto& s : suggestions) {
-            cout << s << "    ";
+            cout << "    " << s;  // 4 spaces
         }
-        cout << endl;
+         cout << endl << endl;
     }
-    cout << endl; //prints a blank line
 }
-    /*
-    FORMAT OF MISPELLED WORD:
-        saed on line 5
-    Suggested corrections:
-        saved    sad
+/*
+FORMAT OF MISPELLED WORD:
+    saed on line 5
+Suggested corrections:
+    saved    sad
 
-    remirmand on line 6
-    No suggestions found
-    */
+remirmand on line 6
+No suggestions found
+*/
