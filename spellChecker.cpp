@@ -171,8 +171,8 @@ vector<string> generateSuggestions(const string& word, const Dictionary& dict) {
 }
 
 void printMisspelling(string word, int lineNum, vector<string> suggestions) {
+    cout << word << " on line " << lineNum << endl;
     if (suggestions.empty()) {
-        cout << word << " on line " << lineNum << endl;
         cout << "No suggestions found\n\n";
     } else {
         cout << "Suggested corrections:" << endl;
@@ -183,11 +183,24 @@ void printMisspelling(string word, int lineNum, vector<string> suggestions) {
     }
 }
 /*
-FORMAT OF MISPELLED WORD:
-    saed on line 5
+FORMAT OF OUTPUT BELOW:
+saed on line 5
 Suggested corrections:
     saved    sad
 
 remirmand on line 6
 No suggestions found
+
+RUN PROGRAM VIA TERMINAL:
+g++ -std=c++17 Dictionary.cpp spellChecker.cpp -o spellcheck
+./spellcheck smallDict.txt test1.txt dictstruct_out.txt > output.txt
+cat output.txt
+
+PUSH TO GITHUB:
+git status
+
+git add spellChecker.cpp
+git commit -m "Fix spelling output formatting"
+git push
 */
+
