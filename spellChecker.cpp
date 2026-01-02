@@ -175,7 +175,6 @@ void printMisspelling(string word, int lineNum, vector<string> suggestions) {
         cout << word << " on line " << lineNum << endl;
         cout << "No suggestions found\n\n";
     } else {
-        cout << "    " << word << " on line " << lineNum << endl;
         cout << "Suggested corrections:" << endl;
         for (const auto& s : suggestions) {
             cout << "    " << s;  // 4 spaces
